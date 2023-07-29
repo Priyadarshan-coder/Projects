@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Bus Route</title>
+</head>
+
+<body>
+  <nav class="navbar">
+    <!-- LOGO -->
+    <div class="logo"><i class="fa-solid fa-bus"></i></div>
+
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+
+      <!-- USING CHECKBOX HACK -->
+      <input type="checkbox" id="checkbox_toggle" />
+      <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+
+      <!-- NAVIGATION MENUS -->
+      <div class="menu">
+
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+
+        <li class="services">
+          <a href="#">Services</a>
+
+          <!-- DROPDOWN MENU -->
+          <ul class="dropdown">
+            <li><a href="/search">Search Bus </a></li>
+            <li><a href="/show">See all buses</a></li>
+          </ul>
+
+        </li>
+        <li><a href="#">Contact</a></li>
+      </div>
+    </ul>
+  </nav>
+  <div class="bg">
+    <div class="table-container">
+      <div class="heading">
+          <div>
+            Please click on the button:
+            <button id ="btn" class="btn btn-primary" type="submit">Button</button>
+          </div>
+            
+        <!--  <input type="text"  placeholder="Start station" required>
+          <input type="text"  placeholder="End station" required>
+          </div>
+        
+         <div> <button type="button" id="btn" >Submit</button></div>  
+      
+      </div>-->
+      <table class="table">
+      
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+ 
+  </div>
+  <script>
+  async function loadUsers(){
+    return (await fetch("data2.json")).json();
+}
+let btn=document.getElementById("btn");
+    btn.addEventListener('click',async () =>
+    {
+        let users=[];
+        try{
+            users=await loadUsers();
+        }
+        catch(e)
+        {
+            console.log("Error");
+            console.log(e);
+        }
+        /*console.log(users);
+        const para=document.createElement('p')
+        para.innerText=users[0].Start_And_Stop;
+        const show=document.getElementById("show")
+        show.appendChild(para)*/
+    const table=document.querySelector("table");
+    const tablehead=table.querySelector("thead");
+    const tablebody=table.querySelector("tbody");
+    const header=["Bus-Name","Start_And_Destination"];
+    tablehead.innerHTML="<tr></tr>";
+    tablebody.innerHTML="";
+    //populate the headers
+    for(let i=0;i<header.length;i++)
+    {
+        const headerElement=document.createElement("th");
+        headerElement.textContent=header[i];
+        tablehead.querySelector("tr").appendChild(headerElement);
+    }
+    //populate the rows
+    for(j=0;j<users.length;j++)
+    {
+        const rowElement=document.createElement("tr");
+        
+        const cellElement1=document.createElement("td");
+        cellElement1.textContent=users[j].Bus_Name;
+        rowElement.appendChild(cellElement1);
+        const cellElement2=document.createElement("td");
+        cellElement2.textContent=users[j].Start_And_Stop;
+        rowElement.appendChild(cellElement2);
+        tablebody.appendChild(rowElement);
+    }
+    console.log(users)
+    });
+  </script>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: cursive;
+    background-image: linear-gradient(-90deg,rgba(51, 42, 42, 0.6),rgba(136, 136, 93, 0.55));
+  }
+  
+  .table-container{
+    padding: 0 10%;
+    margin: 40px auto 0;
+  }
+  .heading {
+font-size: 40px;
+text-align: center;
+color: #f1f1f1;
+margin-bottom: 40px;
+  }
+  .table-container{
+    width:100%;
+    border-collapse: collapse;
+  }
+  .table thead{
+    background-color: #ee2828;
+  }
+  .table thead tr th{
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.35px;
+    color: #FFFFFF;
+    opacity: 1;
+    padding: 12px;
+    vertical-align: top;
+    border: 1px solid #dee2e685;
+  }
+  .table tbody tr td{
+    font-size: 14px;
+    letter-spacing: 0.35px;
+    font-weight: normal;
+    color: #f1f1f1;
+    background-color: #3c3f44;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #dee1e685;
+  }
+  @media (max-width: 768px)
+  {
+    .table thead{
+      display: none;
+    }
+    .table, .table tbody, .table tr, .table td{
+      display: block;
+      width: 100%
+    }
+    .table tr{
+      margin-bottom: 15px;
+    }
+    .table tbody tr td{
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+    .table td::before{
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style: none;
+  }
+  /* NAVBAR STYLING STARTS */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-image: linear-gradient(to right, rgba(173, 142, 89, 0.8), rgba(74, 130, 150, 0.616));
+    color: #fff;
+  }
+  
+  .nav-links a {
+    color: #fff;
+  }
+  
+  /* LOGO */
+  .logo {
+    font-size: 32px;
+  }
+  
+  /* NAVBAR MENU */
+  .menu {
+    display: flex;
+    gap: 1em;
+    font-size: 18px;
+  }
+  
+  .menu li:hover {
+    background-color: #4c9e9e;
+    border-radius: 5px;
+    transition: 0.3s ease;
+  }
+  
+  .menu li {
+    padding: 5px 14px;
+  }
+  
+  /* DROPDOWN MENU */
+  .services {
+    position: relative; 
+  }
+  
+  .dropdown {
+    background-color: rgb(1, 139, 139);
+    padding: 1em 0;
+    position: absolute; /*WITH RESPECT TO PARENT*/
+    display: none;
+    border-radius: 8px;
+    top: 35px;
+  }
+  
+  .dropdown li + li {
+    margin-top: 10px;
+  }
+  
+  .dropdown li {
+    padding: 0.5em 1em;
+    width: 8em;
+    text-align: center;
+  }
+  
+  .dropdown li:hover {
+    background-color: #4c9e9e;
+  }
+  
+  .services:hover .dropdown {
+    display: block;
+  }
+  /* RESPONSIVE NAVBAR MENU STARTS */
+
+/* CHECKBOX HACK */
+
+input[type=checkbox] {
+    display: none;
+  } 
+  
+  /* HAMBURGER MENU */
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    user-select: none;
+  }
+  
+  /* APPLYING MEDIA QUERIES */
+  @media (max-width: 768px) {
+   .menu {
+      display:none;
+      position: absolute;
+      background-color:teal;
+      right: 0;
+      left: 0;
+      text-align: center;
+      padding: 16px 0;
+    }
+  
+    .menu li:hover {
+      display: inline-block;
+      background-color:#4c9e9e;
+      transition: 0.3s ease;
+    }
+  
+    .menu li + li {
+      margin-top: 12px;
+    }
+  
+    input[type=checkbox]:checked ~ .menu {
+      display: block;
+    }
+  
+    .hamburger {
+      display: block;
+    }
+  
+    .dropdown {
+      left: 50%;
+      top: 30px;
+      transform: translateX(35%);
+    }
+  
+    .dropdown li:hover {
+      background-color: #4c9e9e;
+    }
+  }
+  </style>
+</body>
+</html>
