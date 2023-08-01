@@ -1,0 +1,104 @@
+<!-- quiz.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form action="/submitQuiz" method="POST" id="quizForm">
+        <div class="main-div">
+            {{#each questions}}
+            <div class="inner-div">
+                <h2 class="question" id="question{{@index}}">{{this.question}}</h2>
+                <ul>
+                    {{#each this.options}}
+                    <li>
+                        <input type="radio" name="answer{{@../index}}" id="{{@../index}}-{{@index}}" class="answer" value="{{@index}}" data-question="{{this.question}}">
+                        <label for="{{@../index}}-{{@index}}" id="{{@../index}}-option{{@index}}">{{this}}</label>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+            <input type="submit" value="submit" id="submit">
+        </div>
+    </form>
+
+     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap');    
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Josefin Sans" , sans-serif;
+    font-weight: 300;
+}
+html{
+    font-size: 62.5%;
+}
+.main-div
+{
+    width:100vw;
+    display : grid;
+    min-height:100vh;
+    place-items: center;
+    background-color:hsl(206, 92%, 94%)
+}
+.inner-div
+{
+    width:40vw;
+    background-color: #fff;
+    padding: 3rem 8rem;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 1rem -0.7rem rgba(0,0,0,0.4) ;
+}
+.inner-div h2{
+    font-size: 3.5rem;
+    font-weight:400 ;
+    margin:1rem 0 4rem 0 ;
+}
+.inner-div li{
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    list-style: none;
+}
+input{
+    cursor:pointer;
+}
+#submit{
+    padding:1rem 3rem;
+    outline:none;
+    font-size: 2rem;
+    font-size: 400;
+    display:block;
+    margin:auto;
+    border:none;
+    text-transform: uppercase;
+    color:#fff;
+    background-color: #74b9ff;
+    margin-top: 4rem;
+}
+#submit:hover{
+    background-color: #0984e3;
+}
+@media(max-width: 658px){
+    .inner-div
+{
+    width:75vw;
+    background-color: #fff;
+    padding: 3rem 8rem;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 1rem -0.7rem rgba(0,0,0,0.4) ;
+}
+.inner-div h2{
+    font-size: 1.5rem;
+    font-weight:400 ;
+    margin:1rem 0 4rem 0 ;
+}
+}
+ 
+ </style>
+</body>
+</html>

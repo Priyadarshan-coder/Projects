@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive Registration Form</title>
+    <meta name="viewport" content="width=device-width,
+      initial-scale=1.0"/>
+    
+  </head>
+  <body>
+    
+    <form action="/addQuestions" method="post" id="all-questions-form">
+    <div class="container" id="container">
+      
+             
+            </div>
+        <div class="form-submit-btn">
+          <input type="button" value="Add" onclick="addQuestion()">
+        </div>
+        <div class="form-submit-btn">
+            <input type="submit" value="Register">
+          </div>
+    
+      </form>
+  
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:  linear-gradient(to top left, #3ed8ff, #a8f5ff);;
+            background-size: cover;
+        }
+        
+        .container{
+            width: 100%;
+            max-width: 650px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 28px;
+            margin: 0 28px;
+            border-radius: 10px;
+            box-shadow: inset -2px 2px 2px white;
+        }
+        
+        .form-title{
+            font-size: 26px;
+            font-weight: 600;
+            text-align: center;
+            padding-bottom: 6px;
+            color: white;
+            text-shadow: 2px 2px 2px black;
+            border-bottom: solid 1px white;
+        }
+        
+        .main-user-info{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+        
+        .user-input-box:nth-child(2n){
+            justify-content: end;
+        }
+        
+        .user-input-box{
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+            padding-bottom: 15px;
+        }
+        
+        .user-input-box label{
+            width: 95%;
+            color: white;
+            font-size: 20px;
+            font-weight: 400;
+            margin: 5px 0;
+        }
+        
+        .user-input-box input{
+            height: 40px;
+            width: 95%;
+            border-radius: 7px;
+            outline: none;
+            border: 1px solid grey;
+            padding: 0 10px;
+        }
+        
+        .gender-title{
+            color:white;
+            font-size: 24px;
+            font-weight: 600;
+            border-bottom: 1px solid white;
+        }
+        
+        .gender-category{
+            margin: 15px 0;
+            color: white;
+        }
+        
+        .gender-category label{
+            padding: 0 20px 0 5px;
+        }
+        
+        .gender-category label,
+        .gender-category input,
+        .form-submit-btn input{
+            cursor: pointer;
+        }
+        
+        .form-submit-btn{
+            margin-top: 20px;
+        }
+        
+        .form-submit-btn input{
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 20px;
+            padding: 10px;
+            border:none;
+            border-radius: 3px;
+            color: rgb(209, 209, 209);
+            background: rgba(63, 114, 76, 0.7);
+        }
+        
+        .form-submit-btn input:hover{
+            background: rgba(56, 204, 93, 0.7);
+            color: rgb(255, 255, 255);
+        }
+        
+        @media(max-width: 600px){
+            .container{
+                min-width: 280px;
+            }
+        
+            .user-input-box{
+                margin-bottom: 12px;
+                width: 100%;
+            }
+        
+            .user-input-box:nth-child(2n){
+                justify-content: space-between;
+            }
+        
+            .gender-category{
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+        
+            .main-user-info{
+                max-height: 380px;
+                overflow: auto;
+            }
+        
+            .main-user-info::-webkit-scrollbar{
+                width: 0;
+            }
+        }
+        </style>
+        <script>
+          let questionCount = 1;
+
+function addQuestion() {
+  const questionsContainer = document.getElementById('container');
+
+  const newForm = document.createElement('div');
+  newForm.innerHTML = `<h1 class="form-title">Question ${questionCount}</h1>
+        <div class="main-user-info">
+          <div class="user-input-box">
+            <label >Question Name</label>        
+            <input type="text"
+            name="question_${questionCount}"
+             required
+                 placeholder="Enter Question Name"/>
+          </div>
+          <div class="user-input-box">
+            <label >Correct answer</label>
+            <input type="number"
+                    name="answer_${questionCount}"
+                     required
+                    placeholder="Enter Correct Answer"/>
+          </div>
+          <div class="user-input-box">
+            <label >Option1</label>
+            <input type="text"
+            name="option1_${questionCount}" 
+            required
+                    placeholder="Enter option1"/>
+          </div>
+          <div class="user-input-box">
+            <label >Option2</label>
+            <input type="text"
+            name="option2_${questionCount}" 
+            required
+                    placeholder="Enter option2"/>
+          </div>
+          <div class="user-input-box">
+            <label >Option3</label>
+            <input type="text"
+            name="option3_${questionCount}"
+             required
+                    placeholder="Enter option3"/>
+          </div>
+          <div class="user-input-box">
+            <label >Option4</label>
+            <input type="text"
+            name="option4_${questionCount}" 
+            required
+                    placeholder="Enter option4"/>
+          </div>
+        `;
+  questionsContainer.appendChild(newForm);
+      questionCount++;
+    }
+
+        </script>
+  </body>
+</html>

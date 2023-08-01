@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Marks</title>
+  <!-- Load Chart.js from a CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+ <div class="container">
+        <div class="chart">
+             <canvas id="barChart" width="300" height="300"></canvas>
+        </div>
+     <div class="chart">
+             <canvas id="doughnut" width="300" height="300"></canvas>
+        </div>
+    </div>
+     <script>
+         document.addEventListener("DOMContentLoaded", function() {
+      const classData = {{{json classAverageData}}}; // Triple curly braces to avoid HTML escaping
+      const classNames = classData.map(({ classname }) => classname);
+      const classAverages = classData.map(({ average }) => average);
+
+      // Create the bar chart
+      const barChartCtx = document.getElementById("barChart").getContext("2d");
+      new Chart(barChartCtx, {
+        type: "bar",
+        data: {
+          labels: classNames,
+          datasets: [
+            {
+              label: "Average Marks",
+              data: classAverages,
+              backgroundColor: "rgba(54, 162, 235, 0.6)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    });
+  </script>
+   <script>
+    // JavaScript code to generate the bar chart with hardcoded data
+    document.addEventListener("DOMContentLoaded", function() {
+       const classData = {{{json classAverageData}}}; // Triple curly braces to avoid HTML escaping
+      const classNames = classData.map(({ classname }) => classname);
+      const classAverages = classData.map(({ average }) => average);
+      const barChartCtx = document.getElementById("doughnut").getContext("2d");
+      new Chart(barChartCtx, {
+        type: "doughnut",
+        data: {
+          labels: classNames,
+          datasets: [
+            {
+              label: "Average Marks",
+              data: classAverages, // Replace with actual average marks data
+              backgroundColor: ["rgba(54, 162, 235, 0.6)", "rgba(75, 192, 192, 0.6)"],
+              borderColor: ["rgba(54, 162, 235, 1)", "rgba(75, 192, 192, 1)"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    });
+  </script>
+   <style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    body{
+        background:rgba(201, 210, 99, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: ceneter;
+        gap:200;
+    }
+    .chart{
+        padding:2rem;
+        border:1px solid #f1f431;
+        border-radius: 1rem;
+        background: #251c35;
+        box-shadow: 0 0 16px rgba(0,0,0,0.8);
+    }
+</style>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="chart"><p><h1>{{studobj.name}}</h1></p>
+        <p>You have got</h1></p>
+          <p>{{studobj.score}} out of {{studobj.total}}</p>
+          <p>So percentage is {{studobj.percentage}}%</p>
+    </div>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    body{
+        background:rgba(201, 210, 99, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .chart{
+        padding:8rem;
+        border:1px solid #f1f431;
+        border-radius: 1rem;
+        background: #357569;
+        box-shadow: 0 0 16px rgba(0,0,0,0.8);
+        font-size: 1.35rem;
+    }
+    @media (max-width: 582px) {
+      .chart{
+        padding:2rem;
+        border:1px solid #f1f431;
+        border-radius: 1rem;
+        background: #357569;
+        box-shadow: 0 0 16px rgba(0,0,0,0.8);
+        font-size: 1.5rem;
+
+    }
+      
+    }
+</style>
+</body>
+</html>
