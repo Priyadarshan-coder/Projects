@@ -1,0 +1,4 @@
+1>Clone the project to your local system and open text editor.
+2>Install node package manager by running the commnand npm init -y.
+3>Install dependencies npm i express  mongoose  hbs validator express-session chart.js mongodb
+4>Set up the server by opening the app.js file for which the path is expressfiles/src/app.js.
